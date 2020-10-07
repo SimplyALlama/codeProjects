@@ -1,0 +1,23 @@
+			Specs
+python (pygame or arcade) https://opensource.com/article/18/4/easy-2d-game-creation-python-and-arcade
+java script?
+
+
+			Features
+generate either:
+	world map (multiple levels based on same seed)
+	level by level
+
+seed controls:
+	number of levels (if world map)
+	length of level (number of platforms)
+	placement of platforms
+	type of platform?
+
+level scrolls from right to left
+
+platforms placed total jump distance - random value apart
+
+save game?
+
+			
