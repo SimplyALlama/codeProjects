@@ -1,13 +1,15 @@
-import arcade
-import time
 import math
 import random
+import time
+
+import arcade
 import numpy
 
 #   screen width and height
 sWidth = 900
 sHeight = 600
 
+global plats
 
 class MyGame(arcade.Window):
     """ Main application class. """
@@ -29,13 +31,13 @@ class MyGame(arcade.Window):
         self.numPlat = int(math.sqrt(seed) / 3)
 
         print("seed: ", seed)
-        print("number of platforms: ", numPlat)
+        print("number of platforms: ", self.numPlat)
 
         #	sets up the 2d list for the platform data
-        rows, cols = (numPlat, 6)
+        rows, cols = (self.numPlat, 6)
         self.plats = [[0 for i in range(cols)] for j in range(rows)]
 
-        for x in range(numPlat):
+        for x in range(self.numPlat):
             height = 0
             width = 0
             leftPos = 0
@@ -47,27 +49,27 @@ class MyGame(arcade.Window):
                 width = 75
 
             else:
-                temp = plats[x - 1][3]
+                temp = self.plats[x - 1][3]
                 leftPos = (temp + int(math.sqrt(seed) / 2))
                 width = int(math.sqrt(seed) / 2)
 
             height = int((seed / 275) + heightMod)
             rightPos = leftPos + width
 
-            plats[x][0] = height
-            plats[x][1] = leftPos
-            plats[x][2] = width
-            plats[x][3] = rightPos
-            plats[x][4] = (rightPos - leftPos) / 2  # center x
-            plats[x][5] = height / 2  # center y
+            self.plats[x][0] = height
+            self.plats[x][1] = leftPos
+            self.plats[x][2] = width
+            self.plats[x][3] = rightPos
+            self.plats[x][4] = (rightPos - leftPos) / 2  # center x
+            self.plats[x][5] = height / 2  # center y
 
     def on_draw(self):
         """ Render the screen. """
         arcade.start_render()
 
-        for i in range(numPlat):
-            arcade.create_rectangle_filled(
-                plats[i][4], plats[i][5], plats[i][2], plats[i][0], arcade.color.red)
+        for i in range(self.numPlat):
+            arcade.draw_rectangle_filled(
+                self.plats[i][4], self.plats[i][5], self.plats[i][2], self.plats[i][0], arcade.color.FERRARI_RED)
 
     def update(self, delta_time):
         """ All the logic to move, and the game logic goes here. """

@@ -20,8 +20,9 @@ arcade.start_render()
 # Draw the face
 x = 300
 y = 300
-radius = 200
-arcade.draw_circle_filled(x, y, radius, arcade.color.YELLOW)
+wid = 100
+height = 100
+arcade.draw_rectangle_filled(x, y, wid, height, arcade.color.RED)
 
 arcade.finish_render()
 
