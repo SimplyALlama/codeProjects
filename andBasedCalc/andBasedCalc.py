@@ -1,7 +1,9 @@
 import numpy as np
 
-calcRes = 0
+firstCalc = True
+longCalc = False
 
+#operations
 def add(num1, num2):
 	res = float(num1) + float(num2)
 	return res
@@ -35,6 +37,7 @@ def divis(num1, num2):
 
 	return quotient
 
+#calculator "case switch"
 def calc(num1, num2, op):
 	if op == "+":
 		return add(num1, num2)
@@ -48,7 +51,7 @@ def calc(num1, num2, op):
 	elif op == "/":
 		return divis(num1, num2)
 		
-#input
+#taking input from the user
 eqInput = input("Enter your equation: ")
 
 arrCount = 0
@@ -57,7 +60,7 @@ eqArr = [""] * len(eqInput)
 for x in range(len(eqInput)):
 	if eqInput[x].isnumeric() == True or eqInput[x] == ".":
 		eqArr[arrCount] = eqArr[arrCount] + eqInput[x]
-
+		
 	elif eqInput[x] == " ":
 		pass
 
@@ -66,15 +69,28 @@ for x in range(len(eqInput)):
 		eqArr[arrCount] = eqInput[x]
 		arrCount += 1
 
+#removing unused array/list sections
 popCount = len(eqInput) - (arrCount + 1)
-	
 for i in range(popCount):
 	eqArr.pop()	
-		
+
 print(eqArr)
 
+#running of the calculator
+if (len(eqInput) > 3):
+    longCalc = True
+    
 for x in range(len(eqArr)):
-	if eqArr[x].isnumeric() == False:
-		calcRes += calc(eqArr[x-1], eqArr[x+1], eqArr[x])
-		print("\n= " + str(calcRes))
-		
+    if eqArr[x].isnumeric() == False:
+        
+        if firstCalc == True and longCalc == False:
+            calcRes = calc(eqArr[x-1], eqArr[x+1], eqArr[x])
+    
+        elif firstCalc == True and longCalc == True:
+            calcRes = calc(eqArr[x-1], eqArr[x+1], eqArr[x])
+            firstCalc = False
+        
+        elif firstCalc == False and longCalc == True:
+            calcRes = calc(calcRes, eqArr[x+1], eqArr[x])
+    
+print("= " +  str(calcRes))
