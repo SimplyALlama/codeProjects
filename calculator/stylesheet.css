@@ -1,0 +1,11 @@
+button {
+	font-size: large;
+	
+}
+
+.buttonRow
+{
+	margin-top: 10px;
+    margin-bottom: 10px;
+	flex: auto;
+}
